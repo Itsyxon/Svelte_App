@@ -1,18 +1,39 @@
-<script></script>
+<script>
+  import { goto } from '$app/navigation'; 
+  import { browser } from '$app/environment';
+  import Button from '$lib/components/Button.svelte'
+
+  let login = '';
+  let password = '';
+
+  $: isDisabled = !login.trim() || !password.trim()
+
+  async function formSubmit() {
+    if (login == 'admin' && password == 'admin') {
+      if (browser) {
+        localStorage.setItem('token', 'admin');
+      }
+      await goto('/'); 
+    } else {
+      alert('Неверные данные!');
+    }
+  } 
+</script>
 <div class="form-wrapper">
-    <form class="form">
+    <form on:submit|preventDefault={formSubmit} class="form">
         <div class="form-group">
             <h1 class="form-title">Авторизация</h1>
         </div>
         <div class="form-group">
-            <input class="form-input" type="text" name="login" placeholder="Логин">
+            <input bind:value={login} class="form-input" type="text" name="login" placeholder="Логин">
         </div>
         <div class="form-group">
-            <input class="form-input" type="password" name="password" placeholder="Пароль">
+            <input bind:value={password} class="form-input" type="password" name="password" placeholder="Пароль">
         </div>
         <div class="form-group btn-group">
-            <button class="form-btn">Войти</button>
+            <Button disabled={isDisabled}>Войти</Button>
         </div>
+        <p class="form-quote">Логин: admin, Пароль: admin (тестовые данные)</p>
     </form>
 </div>
 
@@ -52,15 +73,8 @@
         border: none;
         box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
     }
-    .form-btn {
-        width: 110px;
-        height: 40px;
-        padding: 8px 0;
-        border-radius: 5px;
-        border: 1px solid white;
+    .form-quote {
         color: white;
-        background-color: var(--secondary);
-        cursor: pointer;
+         text-shadow: 2px 2px 13px black;
     }
-    
 </style>
