@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Cascadia+Code:ital,wght@0,200..700;1,200..700&display=swap');
+
+* {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    --primary: #010101;
+    --secondary: #6ca7df;
+}
+
+body {
+    background-color: #efeff1;
+    color: #010101;
+    font-family: 'Arimo';
+    background-image: url('./images/background.jpg');
+}
